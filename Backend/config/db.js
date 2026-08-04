@@ -1,21 +1,20 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const connectDB = async () => {
   try {
-    const mongoUri = process.env.MONGO_URI || process.env.MONGODB_URI;
+    const mongoUri = process.env.MONGO_URI || process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/blood-bank';
 
-    if (!mongoUri) {
-      throw new Error("No MongoDB URI found. Set MONGO_URI in your environment.");
-    }
+    await mongoose.connect(mongoUri, {
+      serverSelectionTimeoutMS: 5000,
+    });
 
-    await mongoose.connect(mongoUri);
-
-    console.log("MongoDB Connected Successfully");
+    console.log('MongoDB connected successfully');
   } catch (error) {
-    console.error("MongoDB Connection Failed");
-    console.error(error.message);
-
-    process.exit(1);
+    console.error('MongoDB connection failed:', error.message);
+    throw error;
   }
 };
 

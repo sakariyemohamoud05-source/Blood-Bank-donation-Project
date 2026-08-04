@@ -7,6 +7,7 @@ import connectDB from './config/db.js'
 import authRoutes from './routes/authRoutes.js'
 import emergencyRoutes from './routes/emergencyRoutes.js'
 import notificationRoutes from './routes/notificationRoutes.js'
+import donorRoutes from './routes/donorRoutes.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -21,6 +22,7 @@ app.use(express.json())
 app.use('/api/auth', authRoutes)
 app.use('/api/emergency', emergencyRoutes)
 app.use('/api/notification', notificationRoutes)
+app.use('/api/donors', donorRoutes)
 
 
 
